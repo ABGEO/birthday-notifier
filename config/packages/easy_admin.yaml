@@ -5,6 +5,20 @@ easy_admin:
     display_avatar: false
   entities:
     Birthday:
+      label: Birthdays
       class: App\Entity\Birthday
       list:
-        fields: ['id', 'name', 'date']
+        fields:
+          - 'id'
+          - 'name'
+          - { property: 'date', type: 'date' }
+      form:
+        fields:
+          - { property: 'date', type: 'birthday' }
+          - 'name'
+    Email:
+      label: Emails for notification
+      class: App\Entity\Email
+      form:
+        fields:
+          - { property: 'email', type: 'email' }
