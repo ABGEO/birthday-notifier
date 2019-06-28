@@ -19,6 +19,26 @@ class EmailRepository extends ServiceEntityRepository
         parent::__construct($registry, Email::class);
     }
 
+    /**
+     * Get emails for sending notifications.
+     *
+     * @return array|null
+     */
+    public function getEmails(): ?array
+    {
+        $emails = $this->createQueryBuilder('e')
+            ->select('e.email')
+            ->getQuery()
+            ->getArrayResult();
+
+        $return = [];
+        foreach ($emails as $email) {
+            $return[] = $email['email'];
+        }
+
+        return $return;
+    }
+
     // /**
     //  * @return Email[] Returns an array of Email objects
     //  */

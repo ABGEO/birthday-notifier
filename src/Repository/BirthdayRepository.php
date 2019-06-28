@@ -19,6 +19,27 @@ class BirthdayRepository extends ServiceEntityRepository
         parent::__construct($registry, Birthday::class);
     }
 
+    /**
+     * Get birthdays by date.
+     *
+     * @param \DateTime $date Birthday.
+     *
+     * @return array|null Birthdays.
+     */
+    public function findByBirthday(\DateTime $date): ?array
+    {
+        $day = $date->format('d');
+        $month = $date->format('m');
+
+        $result = $this->createQueryBuilder('b')
+            ->andWhere('b.date like :birthday')
+            ->setParameter('birthday', "%-{$month}-{$day} %")
+            ->getQuery()
+            ->getResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Birthday[] Returns an array of Birthday objects
     //  */

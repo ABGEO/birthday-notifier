@@ -1,0 +1,11 @@
+<p>Hi there,</p>
+
+<p>At <b>{{ date|date('d/m/Y') }}</b> the following people have birthdays: </p>
+
+<ul>
+    {% for name in names %}
+        <li><b>{{ name }}</b></li>
+    {% endfor %}
+</ul>
+
+<p>Do not forget to congratulate!</p>
